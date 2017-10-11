@@ -12,6 +12,10 @@ angular.module('App', ['ngRoute'])
         templateUrl: 'assets/views/persons.html',
         controller: 'personsCtrl'
       })
+      .when('/quotes/:person_id', {
+        templateUrl: 'assets/views/quotes.html',
+        controller: 'quotesCtrl'
+      })
       .otherwise({
         redirectTo: '/home'
       });
@@ -27,6 +31,11 @@ angular.module('App', ['ngRoute'])
     $scope.persons = personSrv.getAllPersons();
   }])
 
+  .controller('quotesCtrl', ['$scope', '$routeParams', 'personSrv', 'quotesSrv', function quotesCtrl($scope, $routeParams, personSrv, quotesSrv) {
+    $scope.person = personSrv.getPerson(parseInt($routeParams.person_id));
+    $scope.quotes = quotesSrv.getAllQuotesFromPerson($scope.person);
+  }])
+
   .factory('personSrv', [function() {
     var persons = [{
       'id': 0,
@@ -38,6 +47,39 @@ angular.module('App', ['ngRoute'])
     return {
       getAllPersons: function() {
         return persons;
+      },
+      getPerson: function(person_id) {
+        for (var i = 0; i < persons.length; i++) {
+          if (persons[i].id === person_id) {
+            return persons[i];
+          };
+        }
+        return null;
       }
     }
   }])
+
+  .factory('quotesSrv', [function() {
+    var quotes = [{
+      'id': 0,
+      'quotes': ['Bill Gates quote 1',
+      'Bill Gates quote 2']
+    }, {
+      'id': 1,
+      'quotes': ['Steve Jobs quote 1',
+      'Steve Jobs quote 2']
+    }];
+    return {
+      getAllQuotes: function() {
+        return quotes;
+      },
+      getAllQuotesFromPerson: function(person_id) {
+        for (var i = 0; i < quotes.length; i++) {
+          if (quotes[i].id === person_id) {
+            return quotes[i].quotes;
+          };
+        }
+        return null;
+      }
+    }
+  }]);
