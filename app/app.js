@@ -29,7 +29,7 @@ angular.module('App', ['ngRoute'])
 
   .controller('quotesCtrl', ['$scope', '$routeParams', 'personSrv', 'quotesSrv', function quotesCtrl($scope, $routeParams, personSrv, quotesSrv) {
     $scope.person = personSrv.getPerson(parseInt($routeParams.person_id));
-    $scope.quotes = quotesSrv.getAllQuotesFromPerson($scope.person);
+    $scope.quotes = quotesSrv.getAllQuotesFromPerson(parseInt($routeParams.person_id));
   }])
 
   .factory('personSrv', [function() {
@@ -58,12 +58,12 @@ angular.module('App', ['ngRoute'])
   .factory('quotesSrv', [function() {
     var quotes = [{
       'id': 0,
-      'quotes': ['Bill Gates quote 1',
-      'Bill Gates quote 2']
+      'quotes': ["Bill Gates quote 1",
+      "Bill Gates quote 2"]
     }, {
       'id': 1,
-      'quotes': ['Steve Jobs quote 1',
-      'Steve Jobs quote 2']
+      'quotes': ["Steve Jobs quote 1",
+      "Steve Jobs quote 2"]
     }];
     return {
       getAllQuotes: function() {
