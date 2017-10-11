@@ -1,7 +1,9 @@
 <div class="jumbotron">
-  <h1 class="display-3">Persons</h1>
-  <hr class="m-y-2">
-  <p class="lead">
+  <p class="lead">Persons</p>
+
+  <ul>
+    <li ng-repeat="p in persons">{{ p.name }}</li>
+  </ul>
 
   </p>
 </div>
