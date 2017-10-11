@@ -21,10 +21,6 @@ angular.module('App', ['ngRoute'])
       });
   })
 
-  .config(function($compileProvider) {
-    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|sms):/);
-  })
-
   .controller('homeCtrl', ['$scope', function homeCtrl($scope) {}])
 
   .controller('personsCtrl', ['$scope', 'personSrv', function personsCtrl($scope, personSrv) {
