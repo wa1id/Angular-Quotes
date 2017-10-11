@@ -8,6 +8,10 @@ angular.module('App', ['ngRoute'])
       templateUrl: 'assets/views/home.html',
       controller: 'homeCtrl'
     })
+    .when('/persons', {
+      templateUrl: 'assets/views/persons.html',
+      controller: 'personsCtrl'
+    })
     .otherwise({
       redirectTo: '/home'
     });
@@ -18,5 +22,9 @@ angular.module('App', ['ngRoute'])
 })
 
 .controller('homeCtrl', ['$scope', function homeCtrl($scope) {
-  
+
+}])
+
+.controller('personsCtrl', ['$scope', function personsCtrl($scope) {
+
 }])
